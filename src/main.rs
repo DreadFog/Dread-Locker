@@ -4,7 +4,7 @@ mod settings;
 mod encryption_functions;
 mod tests;
 use crate::settings::Config;
-use crate::encryption_functions::encrypt_dir;
+use crate::encryption_functions::iterate_dir;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config: Config = Config::new(args).unwrap_or_else(|err| {
@@ -13,7 +13,12 @@ fn main() {
         
     });
     style();
-    encrypt_dir("/mnt/f/Programming/Rust/dread_locker/test_dir", config.cyphernumber);
+    if !config.decrypt() {
+
+    } else {
+        iterate_dir("/mnt/f/Programming/Rust/dread_locker/test_dir", &config);
+    }
+    
 }
 fn style() {
     println!("---------------------------------------");

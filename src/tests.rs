@@ -2,7 +2,7 @@
 mod tests {
     use std::{process, fs::{self, OpenOptions}, io::{Write, Seek, SeekFrom}};
 
-    use crate::encryption_functions;
+    use crate::{encryption_functions, settings::Config};
     #[test]
     fn test_encrypt_file() {
         let file_list = fs::read_dir("/mnt/f/Programming/Rust/dread_locker/test_dir").unwrap_or_else(|err| {
@@ -10,7 +10,7 @@ mod tests {
             process::exit(1);
         });
         for file in file_list {
-            encryption_functions::encrypt_file(file.unwrap().path(), 0);
+            //encryption_functions::encrypt_file(file.unwrap().path(), &Config::new);
             break;
         }
         
