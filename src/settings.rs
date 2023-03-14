@@ -10,7 +10,7 @@ impl Config {
         let mut decryption_val: bool = false;
         let test_dir: String = String::from("/mnt/f/Programming/Rust/dread_locker/test_dir");
         let directory;
-        let zero = "0".to_string(); // TODO
+        let zero = String::from("0"); // TODO
         // this param only exists to prevent unwanted executions
         if args.len() < 3 || args[1] != "--execution-key"{
             return Err("secure parameter '--execution-key' missing as first argument");
