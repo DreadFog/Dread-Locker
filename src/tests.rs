@@ -34,6 +34,5 @@ mod tests {
             file1.write_all("Bonjour c'est un test".as_bytes());
             break;
         }
-        
     }
 }
