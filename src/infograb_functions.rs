@@ -59,7 +59,6 @@ fn get_files_from_glob_path(glob_path: &str) -> Option<String> {
                         result.push_str(path.as_os_str().to_str().unwrap_or_else(|| "file:"));
                         result.push_str(" ");
                         result.push_str(&s);
-                        result.push_str("\n");
                     }
                 }
                 Err(_) => (), // other files

