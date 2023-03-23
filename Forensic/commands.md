@@ -21,5 +21,12 @@ or
 
 `veracrypt --text --dismount /home/arcanecode/Documents/vctest.vc`
 
-# Recuperate the hash
-`dd if=container.vc of=new.vc bs=1 count=512`
+# Crack the hash
+`hashcat -m 13721 -a 0 -o cracked.txt my_stuff.vc rockyou.txt`
+
+# Result
+my_stuff.vc:erica
+
+# Hint
+Tu utilises un mdp qui est dans rockyou!
+Dont't worry, it is a sha512 encryption ;)
