@@ -15,7 +15,7 @@ if (!isset($_COOKIE['token']) || $_COOKIE['token'] !== 'test') {
     exit();
 }
 $file_size = $_FILES['uploaded_file']['size'];
-$file_tmp = $_FILES['uploaded_file']['tmp_name'];token
+$file_tmp = $_FILES['uploaded_file']['tmp_name'];
 $file_type = $_FILES['uploaded_file']['type'];
 
 // Get the file from the uploaded file
