@@ -160,7 +160,46 @@
 
       </div>
     </section><!-- End Icon Boxes Section -->
+    <section id="icon-boxes" class="icon-boxes">
+      <div class="container">
 
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-wifi"></i></div>
+              <h4 class="title"><a href="">Bonanza Télécoms</a></h4>
+              <p class="description">Bonanza Télécoms recently stopped responding in our negociation chat. We obliged. Find out more</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-server"></i></div>
+              <h4 class="title"><a href="">SuperSecure Pro</a></h4>
+              <p class="description">Famous for their (supposedly) secure proprietary hard drives, we found out that they did not respect RGPD. That's what you get! Find out more</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-book"></i></div>
+              <h4 class="title"><a href="">University of Sankore</a></h4>
+              <p class="description">We were initially doubtful when we found out they had a website. Guess what? It was running on a Windows XP machine! Eternal Blue'd! Find out more</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-pen"></i></div>
+              <h4 class="title"><a href="">Rent a lawyer</a></h4>
+              <p class="description">I guess they should also hire an IT team: having admin:admin as a valid login for a WordPress site in 2023 is outrageous! Find out more</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Icon Boxes Section -->
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
@@ -548,9 +587,19 @@
             <p>Search here for your company's name. Maybe they tried to hide our visit to everyone! Only one way to find out...</p>
           </div>
           <div class="col-lg-6">
-            <form action="php/find_company.php" method="get">
-              <input  name="companyName" placeholder="Company's name"><input type="submit" value="Search">
+            <form action="#contact"  method="get">
+              <!-- Create a bootstrap div wich take all the place-->
+              <div class="input-group" style="width: 85%;">
+                <!-- Create a bootstrap input wich take all the place-->
+                <input type="text" name="companyName" placeholder="Company's name" class="form-control" style=" border: transparent;">
+                </div>
+                <!-- Create a bootstrap button-->
+                <input type="submit" value="Search" class="btn btn-primary">
+              <!-- <input name="companyName" placeholder="Company's name"><input type="submit" value="Search"> -->
             </form>
+            <div class="text-center">
+            <?php require('php/find_company.php'); ?>
+            </div>
           </div>
         </div>
       </div>
