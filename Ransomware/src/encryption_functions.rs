@@ -80,7 +80,7 @@ pub fn encrypt_file(file_path: PathBuf, config: &Config) {
         .write(true)
         .create(true)
         .open(file_path.clone())
-        .unwrap_or_else(|err| {
+        .unwrap_or_else(|_| {
             process::exit(1);
         });
     let mut contents = String::new();
