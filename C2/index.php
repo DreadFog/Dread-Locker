@@ -57,9 +57,7 @@
   <header id="header" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html">Dread Locker</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href=index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <h1 class="logo"><a href="/">Dread Locker</a></h1>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -597,9 +595,6 @@
                 <input type="submit" value="Search" class="btn btn-primary">
               <!-- <input name="companyName" placeholder="Company's name"><input type="submit" value="Search"> -->
             </form>
-            <div class="text-center">
-            <?php require('php/find_company.php'); ?>
-            </div>
           </div>
         </div>
       </div>

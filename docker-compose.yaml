@@ -1,0 +1,10 @@
+services:
+  c2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c2
+    ports:
+      - "80:80"
+    volumes:
+      - ./upload:/var/www/html/upload
