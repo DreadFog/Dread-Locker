@@ -7,4 +7,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./upload:/var/www/html/upload
+      - C2-upload:/var/www/html/upload
+
+volumes:
+  C2-upload:
