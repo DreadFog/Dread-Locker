@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    echo '<!DOCTYPE html><form action="http://localhost/uploadToC2.php" method="post" enctype="multipart/form-data">
+    echo '<!DOCTYPE html><form action="/uploadToC2.php" method="post" enctype="multipart/form-data">
     Select file to upload:
     <input type="file" name="uploaded_file">
     <input type="submit" value="Upload File" name="submit">
